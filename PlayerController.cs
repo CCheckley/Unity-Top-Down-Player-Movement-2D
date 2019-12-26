@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     public float movementSpeed = 1000.0f;
 
-    void Start()
+    void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -18,12 +18,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Move();
+        Vector2 targetVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Move(targetVelocity);
     }
 
-    void Move()
-    {
-        Vector2 targetPosition = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        rigidbody2D.velocity = (targetPosition * movementSpeed) * Time.deltaTime;
+    void Move(Vector2 targetVelocity)
+    {        
+        rigidbody2D.velocity = (targetVelocity * movementSpeed) * Time.deltaTime;
     }
 }
